@@ -1,10 +1,12 @@
 package day_4_query_param_request_body;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -50,7 +52,7 @@ public class CategoryController {
 
 
     @Test
-    public void test_2_getSingleCategory(){
+    public void test_2_getSingleCategory() throws JsonProcessingException {
 
         // https://backend.cashwise.us   /api/myaccount/categories/    883
 
@@ -62,18 +64,27 @@ public class CategoryController {
 
         System.out.println("Status code: "+ response.statusCode());
 
-        System.out.println("  =======  get data by jsonPath ======================  ");
+        System.out.println("  =======  Get data by jsonPath ======================  ");
         System.out.println(   response.jsonPath().getString("category_id") );
         System.out.println(   response.jsonPath().getString("category_title") );
         System.out.println(   response.jsonPath().getString("category_description") );
 
-        System.out.println("  ======================= ======================  ");
+        System.out.println("  ========= Get data by CustomResponse ====================================  ");
+        // PLS ==>>  import com.fasterxml.jackson.databind.ObjectMapper;
 
         ObjectMapper mapper = new ObjectMapper();
         CustomResponse customResponse = mapper.readValue(  response.asString() ,  CustomResponse.class);
 
 
+        System.out.println(   customResponse.getCategory_id()     );
+        System.out.println(   customResponse.getCategory_title()  );
+        System.out.println(   customResponse.getCategory_description()   );
 
+        System.out.println("=========TEST STARTED===========================");
+        Assert.assertNotNull(   customResponse.getCategory_id()     );
+        Assert.assertNotNull(   customResponse.getCategory_title()    );
+        Assert.assertNotNull(  customResponse.getCategory_description()   );
+        System.out.println("=========TEST PASSED===========================");
 
     }
 
