@@ -64,8 +64,15 @@ public class SellerController {
                 .get(url);
 
         response.prettyPrint();
+    }
 
 
+    @Test
+    public void test_tempor(){
+
+        String token = CashwiseAuthorization.getToken();
+
+        System.out.println( "My token: "+token);
 
     }
 
