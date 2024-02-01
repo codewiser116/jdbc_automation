@@ -68,6 +68,7 @@ public class XmlResponseValidation {
 
     @Test
     public void test_3_getListOfTravellers(){
+
         /**TASK
          *  GET list of Travellers
          *  Find path to Traveller index num:0
