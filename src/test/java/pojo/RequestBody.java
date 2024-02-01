@@ -12,7 +12,7 @@ public class RequestBody {
      *  RequestBody => purpose of this class is described all variables from our request body
      *
      */
-
+   //CashWiseAuthorization
     private String email;
     private String password;
 
