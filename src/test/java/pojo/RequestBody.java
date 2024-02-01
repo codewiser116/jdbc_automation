@@ -10,7 +10,7 @@ import lombok.Setter;
 public class RequestBody {
     /**
      *  RequestBody => purpose of this class is described all variables from our request body
-     *
+     *  We use this to set value our variables (Set all request body data)
      */
    //CashWiseAuthorization
     private String email;

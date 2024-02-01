@@ -1,5 +1,6 @@
 package day_4_query_param_request_body;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -7,6 +8,7 @@ import io.restassured.response.Response;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import pojo.CustomResponse;
 import pojo.RequestBody;
 import utilities.CashwiseAuthorization;
 import utilities.Config;
@@ -59,6 +61,18 @@ public class CategoryController {
                .get( url  );
 
         System.out.println("Status code: "+ response.statusCode());
+
+        System.out.println("  =======  get data by jsonPath ======================  ");
+        System.out.println(   response.jsonPath().getString("category_id") );
+        System.out.println(   response.jsonPath().getString("category_title") );
+        System.out.println(   response.jsonPath().getString("category_description") );
+
+        System.out.println("  ======================= ======================  ");
+
+        ObjectMapper mapper = new ObjectMapper();
+        CustomResponse customResponse = mapper.readValue(  response.asString() ,  CustomResponse.class);
+
+
 
 
     }
