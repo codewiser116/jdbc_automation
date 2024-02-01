@@ -18,6 +18,7 @@ import static utilities.CashwiseAuthorization.getToken;
 
 public class SellerController {
     Faker faker = new Faker();
+    static  String sellerID ="";
 
     @Test
     public void test_1_createNewSeller(){
@@ -31,24 +32,18 @@ public class SellerController {
         requestBody.put("phone_number" , faker.phoneNumber().cellPhone());
         requestBody.put("address" , faker.address().fullAddress());
 
-
-       /*
-                   {
-                "company_name": "Apple1 inc",
-                "seller_name": "Steve",
-                "email": "jaysonq46@gmail.com",
-                "phone_number": "1233454567",
-                "address": "Monaco"
-            }
-        */
-
         Response response = RestAssured.given()
                 .auth().oauth2(  getToken()  )
                 .contentType(ContentType.JSON)
                 .body(  requestBody )
                 .post( url );
 
-        Assert.assertEquals("Status code is not correct", 200, response.statusCode() );
+        Assert.assertEquals("Status code is not correct", 201, response.statusCode() );
+        response.prettyPrint();
+
+        sellerID = response.jsonPath().getString("seller_id");
+
+        System.out.println( "Seller Id: "+ sellerID);
 
 
     }
