@@ -18,7 +18,7 @@ import static utilities.CashwiseAuthorization.getToken;
 
 public class SellerController {
     Faker faker = new Faker();
-    static  String sellerID ="";
+    static String sellerID ="";
 
     @Test
     public void test_1_createNewSeller(){
@@ -44,6 +44,27 @@ public class SellerController {
         sellerID = response.jsonPath().getString("seller_id");
 
         System.out.println( "Seller Id: "+ sellerID);
+
+    }
+
+    @Test
+    public void test_2_getArchivedSellers(){
+        // https://backend.cashwise.us    /api/myaccount/sellers     ?isArchived=false&page=1&size=10
+
+        String url = Config.getProperty("baseUrl")+ "/api/myaccount/sellers";
+
+        Map<String , Object> param = new HashMap<>();
+        param.put("isArchived", false );
+        param.put("page", 1);
+        param.put("size", 10);
+
+        Response response = RestAssured.given()
+                .auth().oauth2(  getToken()  )
+                .params( param )
+                .get(url);
+
+        response.prettyPrint();
+
 
 
     }
