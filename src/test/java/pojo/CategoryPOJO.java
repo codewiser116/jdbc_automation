@@ -5,22 +5,14 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true) // it will ignore all unknown key(variable)
-public class CustomResponse { // ResponseBody
+public class CategoryPOJO {
 
-    /**
-     * CustomResponse==> we use this class to read value of our Response
-     */
+
 
     // Category-controller
     private int category_id;
     private String category_title;
     private String category_description;
-
-
-
-
-
-
 
 
 }

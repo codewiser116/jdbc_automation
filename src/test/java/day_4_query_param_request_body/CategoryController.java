@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import pojo.CategoryPOJO;
 import pojo.CustomResponse;
 import pojo.RequestBody;
 import utilities.CashwiseAuthorization;
@@ -72,8 +73,9 @@ public class CategoryController {
         System.out.println("  ========= Get data by CustomResponse ====================================  ");
         // PLS ==>>  import com.fasterxml.jackson.databind.ObjectMapper;
 
+        // Deserialization Json ==>  Java
         ObjectMapper mapper = new ObjectMapper();
-        CustomResponse customResponse = mapper.readValue(  response.asString() ,  CustomResponse.class);
+        CustomResponse customResponse = mapper.readValue(  response.asString() ,  CustomResponse.class  );
 
 
         System.out.println(   customResponse.getCategory_id()     );
@@ -81,10 +83,19 @@ public class CategoryController {
         System.out.println(   customResponse.getCategory_description()   );
 
         System.out.println("=========TEST STARTED===========================");
-        Assert.assertNotNull(   customResponse.getCategory_id()     );
-        Assert.assertNotNull(   customResponse.getCategory_title()    );
-        Assert.assertNotNull(  customResponse.getCategory_description()   );
+            Assert.assertNotNull(   customResponse.getCategory_id()     );
+            Assert.assertNotNull(   customResponse.getCategory_title()    );
+            Assert.assertNotNull(  customResponse.getCategory_description()   );
         System.out.println("=========TEST PASSED===========================");
+
+
+
+        System.out.println("=========DEDICATED CATEGORY Class==========================");
+        CategoryPOJO categoryPOJO = mapper.readValue(  response.asString(), CategoryPOJO.class );
+
+        System.out.println(  categoryPOJO.getCategory_id()  );
+        System.out.println(  categoryPOJO.getCategory_title()  );
+        System.out.println(  categoryPOJO.getCategory_description()  );
 
     }
 
