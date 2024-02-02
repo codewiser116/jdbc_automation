@@ -33,7 +33,7 @@ public class RequestBody {
    // Seller controller RequestBody variables
     private String company_name;
     private String seller_name;
-    //private String email;
+    //private String email; Leave it as it's ; Because we already have same variable for other category
     private String phone_number;
     private String address;
 
