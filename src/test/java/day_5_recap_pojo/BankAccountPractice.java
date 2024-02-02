@@ -175,9 +175,27 @@ public class BankAccountPractice {
 
 
 
-      //  response.prettyPrint();
+      //  response.prettyPrint()
+        }
 
+    @Test
+    public void test_4_deleteBankAccount() throws JsonProcessingException {
+        // https://backend.cashwise.us /api/myaccount/bankaccount/958
+        // Step -1 GET request URL
+        String url = Config.getProperty("baseUrl") + "/api/myaccount/bankaccount/" + bankId;
 
+        // Step -2  Hit Get request with RestAssured
+        Response response = RestAssured.given()
+                .auth().oauth2(getToken())
+                .delete(url);
+
+        // Step -3 print out status code
+        System.out.println("My status code: " + response.statusCode());
+
+        // Step -4 Assert status code
+        Assert.assertEquals(200, response.statusCode());
+
+        System.out.println("======================================");
     }
 
 

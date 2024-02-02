@@ -108,5 +108,43 @@ public class SellersPractice {
 
     }
 
+    @Test
+    public void test_3_getAllSellers() throws JsonProcessingException {
+        /** TASK GET list of sellers
+         * Use Objectmapper
+         * Use CustomResonse class as a Array Ex: CustomResponse[]
+         * Create for loop and loop all Sellers
+         * Print out and Validate :
+         *
+         * private String seller_name;
+         * private String email;
+         */
 
-}
+        String url = Config.getProperty("baseUrl") + "/api/myaccount/sellers/all";
+
+        Response response = RestAssured.given()
+                .auth().oauth2( getToken() )
+                .get(url);
+
+        response.prettyPrint();
+
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        CustomResponse[] customResponse = mapper.readValue(response.asString(), CustomResponse[].class);
+
+        for (int i=0; i<customResponse.length; i++ ) {
+            System.out.println("=====TEST STARTED====================");
+            Assert.assertNotNull(customResponse[i].getSeller_id());
+            Assert.assertNotNull(customResponse[i].getSeller_name());
+
+            System.out.println("=====TEST PASSED====================");
+
+        }
+
+
+    }
+
+
+
+    }
