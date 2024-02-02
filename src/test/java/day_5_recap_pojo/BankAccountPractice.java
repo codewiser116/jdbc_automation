@@ -71,10 +71,12 @@ public class BankAccountPractice {
         System.out.println( "=====Use ObjectMapper and Get id ===============================");
         // STEP - 10  Use ObjectMapper to Read data from Response body
         ObjectMapper mapper = new ObjectMapper();
+        // STEP - 11  Go inside CustomResponse class and specify your variables you want Read(Fetch data)
         CustomResponse customResponse = mapper.readValue(  response.asString(), CustomResponse.class  );
 
+        bankId = customResponse.getId();
 
-
+        System.out.println( "My ID: " + bankId );
 
 
     }
