@@ -10,10 +10,9 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import pojo.CategoryPOJO;
+import Homework.CategoryPOJO;
 import pojo.CustomResponse;
 import pojo.RequestBody;
-import utilities.CashwiseAuthorization;
 import utilities.Config;
 
 import static utilities.CashwiseAuthorization.getToken;
@@ -76,6 +75,7 @@ public class CategoryController {
         // Deserialization Json ==>  Java
         ObjectMapper mapper = new ObjectMapper();
         CustomResponse customResponse = mapper.readValue(  response.asString() ,  CustomResponse.class  );
+
 
 
         System.out.println(   customResponse.getCategory_id()     );

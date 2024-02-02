@@ -24,6 +24,30 @@ public class RequestBody {
     private String category_description;
     private boolean flag;
 
+    // Bank account Request body variables
+    private String type_of_pay;
+    private String bank_account_name;
+    private String description;
+    private double balance;
+
+   // Seller controller RequestBody variables
+    private String company_name;
+    private String seller_name;
+    //private String email;
+    private String phone_number;
+    private String address;
+
+
+    /**
+     * {
+     *     "company_name": "Apple1 inc",
+     *     "seller_name": "Steve",
+     *     "email": "jayszonq46@gmail.com",
+     *     "phone_number": "1233454567",
+     *     "address": "Monaco"
+     * }
+     */
+
 }
 
 
