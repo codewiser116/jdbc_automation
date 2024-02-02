@@ -112,9 +112,9 @@ public class BankAccountPractice {
         CustomResponse customResponse = mapper.readValue(response.asString(), CustomResponse.class );
 
         System.out.println("=====TEST STARTED=================");
-        System.out.println(  customResponse.getId() );
-        System.out.println(  customResponse.getBank_account_name() );
-        System.out.println(  customResponse.getBalance() );
+        System.out.println(  "ID: "+customResponse.getId() );
+        System.out.println( "Bank account name: "+ customResponse.getBank_account_name() );
+        System.out.println("Balance: "+  customResponse.getBalance() );
 
         Assert.assertNotNull(  customResponse.getId()  );
         Assert.assertNotNull(  customResponse.getBank_account_name() );
@@ -122,15 +122,11 @@ public class BankAccountPractice {
 
         System.out.println("=====TEST PASSED=================");
 
-
         /**
          *    private String id;
          *     private String bank_account_name;
          *     private double balance;
          */
-
-
-
 
     }
 

@@ -75,5 +75,20 @@ public class SellersPractice {
 
     }
 
+    @Test
+    public void test_2_getSellerByID() throws JsonProcessingException {
+
+        /** GET SELLER BY ID
+         * Validate below data:
+         *     private int  seller_id;
+         *     private String seller_name;
+         *     private String email;
+         *     private String address;
+         * Ex:  Assert.assertNotNull(  customResponse.get  );
+         */
+
+
+    }
+
 
 }
