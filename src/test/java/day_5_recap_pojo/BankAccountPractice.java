@@ -15,6 +15,7 @@ import pojo.RequestBody;
 import utilities.CashwiseAuthorization;
 import utilities.Config;
 
+import java.lang.reflect.Array;
 import java.util.Map;
 
 import static utilities.CashwiseAuthorization.getToken;
@@ -127,6 +128,55 @@ public class BankAccountPractice {
          *     private String bank_account_name;
          *     private double balance;
          */
+
+    }
+
+
+    @Test
+    public void test_3_getAllBankAccounts() throws JsonProcessingException {
+        // https://backend.cashwise.us/api/myaccount/bankaccount
+
+        String  url = Config.getProperty("baseUrl")+ "/api/myaccount/bankaccount" ;
+
+        // Step -2  Hit Get request with RestAssured
+        Response response = RestAssured.given()
+                .auth().oauth2(  getToken() )
+                .get(url );
+
+        // Step -3 print out status code
+        System.out.println( "My status code: " +  response.statusCode());
+
+        // Step -4 Assert status code
+        Assert.assertEquals(200, response.statusCode() );
+
+        System.out.println("=====DESERIALIZATION=================================");
+        // Step-5 create ObjectMapper class
+        ObjectMapper mapper = new ObjectMapper();
+        // Step-5  Since we are getting list of banks we have declared Array of CustomResponse
+        CustomResponse[] customResponses = mapper.readValue(response.asString(),   CustomResponse[].class );
+
+        // Step-6 Get size of Array
+        int sizeOfBankAccounts =  customResponses.length ;
+
+        // Step-6 Print out All bank accounts and Assert them
+    for (int i=0; i<sizeOfBankAccounts; i++){
+
+        System.out.println(  "Bank ID: "+ customResponses[i].getId() );
+        Assert.assertNotNull( customResponses[i].getId()  );
+
+        System.out.println( customResponses[i].getBank_account_name());
+        Assert.assertNotNull( customResponses[i].getBank_account_name()  );
+
+    }
+
+
+        //  customResponse[0].getId()
+
+
+
+
+      //  response.prettyPrint();
+
 
     }
 

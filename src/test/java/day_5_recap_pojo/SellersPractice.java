@@ -78,7 +78,7 @@ public class SellersPractice {
     @Test
     public void test_2_getSellerByID() throws JsonProcessingException {
 
-        /** GET SELLER BY ID
+        /** GET SELLER BY ID    (ALL those are API chaining by seller_id)
          * Validate below data:
          *     private int  seller_id;
          *     private String seller_name;
@@ -86,7 +86,25 @@ public class SellersPractice {
          *     private String address;
          * Ex:  Assert.assertNotNull(  customResponse.get  );
          */
+        String url = Config.getProperty("baseUrl") + "/api/myaccount/sellers/"+seller_id;
 
+        Response response = RestAssured.given()
+                .auth().oauth2( getToken() )
+                .get(url);
+
+        response.prettyPrint();
+
+        System.out.println("======================================");
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        CustomResponse customResponse =mapper.readValue(response.asString(), CustomResponse.class);
+
+        System.out.println("=====TEST STARTED====================");
+        Assert.assertNotNull( customResponse.getSeller_id() );
+        Assert.assertNotNull( customResponse.getSeller_name() );
+        Assert.assertNotNull( customResponse.getAddress() );
+        System.out.println("=====TEST PASSED====================");
 
     }
 
