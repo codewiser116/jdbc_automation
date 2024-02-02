@@ -85,6 +85,51 @@ public class BankAccountPractice {
         bankId = customResponse.getId();
 
         System.out.println( "My ID: " + bankId );
+    }
+
+    @Test
+    public void test_2_getSingleBankAccount() throws JsonProcessingException {
+        // https://backend.cashwise.us /api/myaccount/bankaccount/958
+        // Step -1 GET request URL
+        String  url = Config.getProperty("baseUrl")+ "/api/myaccount/bankaccount/"+bankId ;
+
+        // Step -2  Hit Get request with RestAssured
+        Response response = RestAssured.given()
+                .auth().oauth2(  getToken() )
+                .get(url );
+
+        // Step -3 print out status code
+        System.out.println( "My status code: " +  response.statusCode());
+
+        // Step -4 Assert status code
+        Assert.assertEquals(200, response.statusCode() );
+
+        System.out.println("======================================");
+        // Step -5  Create class ObjectMapper
+        ObjectMapper mapper = new ObjectMapper();
+
+        // Step - 6  create class CustomResponse and read data(fetch data)
+        CustomResponse customResponse = mapper.readValue(response.asString(), CustomResponse.class );
+
+        System.out.println("=====TEST STARTED=================");
+        System.out.println(  customResponse.getId() );
+        System.out.println(  customResponse.getBank_account_name() );
+        System.out.println(  customResponse.getBalance() );
+
+        Assert.assertNotNull(  customResponse.getId()  );
+        Assert.assertNotNull(  customResponse.getBank_account_name() );
+        Assert.assertNotNull(  customResponse.getBalance()  );
+
+        System.out.println("=====TEST PASSED=================");
+
+
+        /**
+         *    private String id;
+         *     private String bank_account_name;
+         *     private double balance;
+         */
+
+
 
 
     }
