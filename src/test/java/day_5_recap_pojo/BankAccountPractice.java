@@ -1,5 +1,7 @@
 package day_5_recap_pojo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -8,6 +10,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import pojo.CustomResponse;
 import pojo.RequestBody;
 import utilities.CashwiseAuthorization;
 import utilities.Config;
@@ -23,7 +26,7 @@ public class BankAccountPractice {
 
 
     @Test
-    public void test_1_createNewBankAccount(){
+    public void test_1_createNewBankAccount() throws JsonProcessingException {
       //   getToken()   import static utilities.CashwiseAuthorization.getToken;  STEP-3
 
         // https://backend.cashwise.us   /api/myaccount/bankaccount
@@ -63,6 +66,15 @@ public class BankAccountPractice {
         // STEP - 9  ==> Print response body and make sure u created new BankAccount
         System.out.println( "=====RESPONSE BODY===============================");
         response.prettyPrint();
+
+
+        System.out.println( "=====Use ObjectMapper and Get id ===============================");
+        // STEP - 10  Use ObjectMapper to Read data from Response body
+        ObjectMapper mapper = new ObjectMapper();
+        CustomResponse customResponse = mapper.readValue(  response.asString(), CustomResponse.class  );
+
+
+
 
 
     }

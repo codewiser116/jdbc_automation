@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true) // it will ignore all unknown key(variable)
-public class CustomResponse { // ResponseBody
+public class CustomResponse { // ==  ResponseBody
 
     /**
      * CustomResponse==> we use this class to read value of our Response
@@ -15,6 +15,40 @@ public class CustomResponse { // ResponseBody
     private int category_id;
     private String category_title;
     private String category_description;
+
+    // Bank account RESPONSE body variables
+    private String id;
+    private String bank_account_name;
+    private double balance;
+
+
+    // Sellers RESPONSE body variables
+    private int  seller_id;
+    private String seller_name;
+    private String email;
+    private String address;
+
+
+
+        /**
+         * {
+         *     "seller_id": 3688,
+         *     "company_name": "Apple1 inc",
+         *     "seller_name": "Steve",
+         *     "seller_surname": null,
+         *     "email": "jayszonqd46@gmail.com",
+         *     "phone_number": "1233454567",
+         *     "address": "Monaco",
+         *     "created": "2024-02-02",
+         *     "income": false,
+         *     "number_of_invoices": 0
+         * }
+         */
+
+
+
+
+
 
 
 
