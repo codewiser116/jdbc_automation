@@ -29,21 +29,33 @@ public class CustomResponse { // ==  ResponseBody
     private String address;
 
 
+    /**
+     * "product_id": 719,
+     *     "product_title": "Apple magic mouse",
+     *     "product_price": 350.0,
+     */
+    private int product_id;
+    private String product_title;
+    private double product_price;
+    private String product_description;
 
-        /**
-         * {
-         *     "seller_id": 3688,
-         *     "company_name": "Apple1 inc",
-         *     "seller_name": "Steve",
-         *     "seller_surname": null,
-         *     "email": "jayszonqd46@gmail.com",
-         *     "phone_number": "1233454567",
-         *     "address": "Monaco",
-         *     "created": "2024-02-02",
-         *     "income": false,
-         *     "number_of_invoices": 0
-         * }
-         */
+
+
+
+    /**
+     * {
+     *     "seller_id": 3688,
+     *     "company_name": "Apple1 inc",
+     *     "seller_name": "Steve",
+     *     "seller_surname": null,
+     *     "email": "jayszonqd46@gmail.com",
+     *     "phone_number": "1233454567",
+     *     "address": "Monaco",
+     *     "created": "2024-02-02",
+     *     "income": false,
+     *     "number_of_invoices": 0
+     * }
+     */
 
 
 

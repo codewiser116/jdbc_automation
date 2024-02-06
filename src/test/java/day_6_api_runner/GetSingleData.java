@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lombok.Data;
+import org.junit.Assert;
 import org.junit.Test;
 import pojo.CustomResponse;
 import utilities.APIRunner;
@@ -101,7 +102,32 @@ public class GetSingleData {
         String path = "/api/myaccount/sellers/3465";
         APIRunner.runGET(path);
         System.out.println(  "Seller id: " +  APIRunner.getCustomResponse().getSeller_id()   );
+        Assert.assertNotNull(   APIRunner.getCustomResponse().getSeller_id()  );
         System.out.println(  "Seller name: " +  APIRunner.getCustomResponse().getSeller_name()   );
+        Assert.assertNotNull(    APIRunner.getCustomResponse().getSeller_name()  );
+
+    }
+
+
+    /** TASK
+     *  Hit GET request with :  APIRunner.runGET(path);
+     *  print out and AssertNotNull :
+             *     private int product_id;
+             *     private String product_title;
+             *     private double product_price;
+     */
+    @Test
+    public void test_5_getSingleProduct(){
+        // https://backend.cashwise.us    /api/myaccount/products/796
+        String  path = "/api/myaccount/products/796";
+        APIRunner.runGET(path );
+        System.out.println(    APIRunner.getCustomResponse().getProduct_id()   );
+        System.out.println(    APIRunner.getCustomResponse().getProduct_title()   );
+        System.out.println(    APIRunner.getCustomResponse().getProduct_price()   );
+
+        Assert.assertNotNull(    APIRunner.getCustomResponse().getProduct_id()  );
+        Assert.assertNotNull(    APIRunner.getCustomResponse().getProduct_title() );
+        Assert.assertNotNull(   APIRunner.getCustomResponse().getProduct_price() );
 
     }
 

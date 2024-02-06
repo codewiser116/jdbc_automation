@@ -38,15 +38,22 @@ public class RequestBody {
     private String address;
 
 
-    /**
-     * {
-     *     "company_name": "Apple1 inc",
-     *     "seller_name": "Steve",
-     *     "email": "jayszonq46@gmail.com",
-     *     "phone_number": "1233454567",
-     *     "address": "Monaco"
-     * }
-     */
+    // day_6 Product controller
+    private String product_title;
+    private double product_price;
+    private int service_type_id;
+    private int category_id;
+    private String product_description;
+
+/**
+         * {
+         *     "product_title": "Toyota1",
+         *     "product_price": 100000,
+         *     "service_type_id": 2,
+         *     "category_id": 805,
+         *     "product_description": "Car"
+         * }
+ */
 
 }
 
