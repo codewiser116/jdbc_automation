@@ -134,22 +134,6 @@ public class GetSingleData {
 
 
 
-  /*  @Test
-    public void exampleCustomMethod(){
-        int a = 1;
-        int b = 4;
-
-        int c ;
-        c =  a +b;
-
-        System.out.println( "Concatenation: " + c );
-
-        System.out.println("======Custom Method==============");
-        System.out.println(  "Concatenation: " +   APIRunner.concatTwoNums(a, b));
-
-    }
-
-   */
 
 
 

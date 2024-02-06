@@ -11,6 +11,7 @@ import static utilities.CashwiseAuthorization.getToken;
 
 public class APIRunner {
     private static CustomResponse customResponse;
+    private static CustomResponse[] customResponseArray;
 
     /** Day_5 APIRunner (Description about this class)
      * APIRunner class contains custom methods for CRUD commands
@@ -34,18 +35,26 @@ public class APIRunner {
                   customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
 
             } catch (JsonProcessingException e) {
+                        // It's nested try-catch; Because we have to handle Array of ==> customResponseArray
+                        System.out.println( " This is a list response ");
+                            try {
+                                customResponseArray = mapper.readValue( response.asString(), CustomResponse[].class );
+                            } catch (JsonProcessingException ex) {
+                                throw new RuntimeException(ex);
+                            }
 
-                System.out.println( " This is a list response ");
             }
-
-        return customResponse;
-
+            return customResponse;
     }
 
 
     // I can read value of my private variable with help of getter method
     public static CustomResponse getCustomResponse(){
         return customResponse;
+    }
+
+    public static CustomResponse[] getCustomResponseArray(){
+        return customResponseArray;
     }
 
 
