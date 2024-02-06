@@ -66,7 +66,6 @@ public class APIRunner {
                 .body( requestBody )
                 .post( url );
 
-
         // step - 3
         ObjectMapper mapper = new ObjectMapper();
         // step -4
@@ -82,6 +81,7 @@ public class APIRunner {
             }
 
         }
+        System.out.println(  "My status code: "+ response.statusCode() );
         return customResponse;
     }
 

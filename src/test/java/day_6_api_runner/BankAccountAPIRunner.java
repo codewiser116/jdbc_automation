@@ -17,6 +17,7 @@ import utilities.Config;
 import static utilities.CashwiseAuthorization.getToken;
 
 public class BankAccountAPIRunner {
+    Faker faker = new Faker();
 
     @Test
     public void test_1_getListOfBankAccounts() throws JsonProcessingException {
@@ -70,7 +71,7 @@ public class BankAccountAPIRunner {
 
     @Test
     public void test_3_createNewBankAccount() throws JsonProcessingException {
-        Faker faker = new Faker();
+
         // https://backend.cashwise.us   /api/myaccount/bankaccount    // STEP -==> set up your URL
         String url = Config.getProperty("baseUrl") + "/api/myaccount/bankaccount";
 
@@ -91,6 +92,24 @@ public class BankAccountAPIRunner {
 
         String bankId = customResponse.getId();
         response.prettyPrint();
+
+    }
+
+    @Test
+    public void test_4_createNewBankAccount_APIRunner() throws JsonProcessingException {
+        String path = "/api/myaccount/bankaccount";
+
+        RequestBody requestBody = new RequestBody();
+        requestBody.setType_of_pay("CASH");
+        requestBody.setBank_account_name(  faker.company().name()+ " bank"  );
+        requestBody.setDescription( faker.commerce().department()+ " company" );
+        requestBody.setBalance( faker.number().numberBetween(200, 15000)  );
+
+        APIRunner.runPOST(path,  requestBody );
+
+        System.out.println( "Bank ID: "+  APIRunner.getCustomResponse().getId()  );
+        System.out.println( "Bank account name: "+  APIRunner.getCustomResponse().getBank_account_name()  );
+
 
     }
 
