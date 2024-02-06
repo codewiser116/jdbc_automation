@@ -103,7 +103,7 @@ public class BankAccountAPIRunner {
         requestBody.setType_of_pay("CASH");
         requestBody.setBank_account_name(  faker.company().name()+ " bank"  );
         requestBody.setDescription( faker.commerce().department()+ " company" );
-        requestBody.setBalance( faker.number().numberBetween(200, 15000)  );
+        requestBody.setBalance( faker.number().numberBetween(200, 20000)  );
 
         APIRunner.runPOST(path,  requestBody );
 

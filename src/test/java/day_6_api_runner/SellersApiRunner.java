@@ -1,11 +1,15 @@
 package day_6_api_runner;
 
+import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.junit.Test;
 import pojo.CustomResponse;
+import pojo.RequestBody;
 import utilities.APIRunner;
+import utilities.Config;
 
 public class SellersApiRunner {
+    Faker faker = new Faker();
 
     @Test
     public void test_1_getListOfSellers(){
@@ -33,6 +37,38 @@ public class SellersApiRunner {
 
 
         }
+
+
+    }
+
+
+    @Test
+    public void test_2_createSeller(){
+
+        String path =  "/api/myaccount/sellers" ;
+
+
+        RequestBody requestBody = new RequestBody();
+        requestBody.setCompany_name( faker.company().name() );
+        requestBody.setSeller_name( faker.name().fullName() );
+        requestBody.setEmail( faker.internet().emailAddress() );
+        requestBody.setPhone_number( faker.phoneNumber().cellPhone() );
+        requestBody.setAddress( faker.address().fullAddress() );
+
+
+        /**TASK
+         * Create new Seller with ApiRunner
+         * Get seller_id and print out
+         * Assert seller_id is not null
+         *  Assert seller_name is not null
+         *
+         */
+        APIRunner.runPOST(path,requestBody);
+        System.out.println(  APIRunner.getCustomResponse().getSeller_id() );
+        System.out.println(  APIRunner.getCustomResponse().getSeller_name() );
+
+        Assert.assertNotNull(  APIRunner.getCustomResponse().getSeller_id() );
+        Assert.assertNotNull( APIRunner.getCustomResponse().getSeller_name() );
 
 
     }
