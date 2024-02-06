@@ -47,7 +47,23 @@ public class BankAccountAPIRunner {
         public void test_2_getListOfBankAccounts_ApiRunner(){
             String path = "/api/myaccount/bankaccount";
             APIRunner.runGET(path );
-           // APIRunner.getCustomResponse()[0].
+            CustomResponse[] customResponses =  APIRunner.getCustomResponseArray();
+
+           // System.out.println(   APIRunner.getCustomResponseArray()[0].getId() );
+
+            int sizeOfArray = customResponses.length;
+
+            for (int i=0; i<sizeOfArray; i++){
+                System.out.println(  "ID: " +  customResponses[i].getId()   );
+                Assert.assertNotNull(  customResponses[i].getId()   );
+
+                System.out.println(  "Bank account name: " + customResponses[i].getBank_account_name()  );
+                Assert.assertNotNull( customResponses[i].getBank_account_name()   );
+
+
+            }
+
+
 
 
         }
