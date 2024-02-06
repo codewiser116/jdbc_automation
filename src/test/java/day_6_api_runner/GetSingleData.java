@@ -76,12 +76,31 @@ public class GetSingleData {
      * Create Object mapper
      * Create CustomResponse
      * GET seller_id
+     *      seller_name
      *  https://backend.cashwise.us   /api/myaccount/sellers/3465
      */
 
     @Test
-    public void test_3_getSingleSeller(){
+    public void test_3_getSingleSeller() throws JsonProcessingException {
         // https://backend.cashwise.us   /api/myaccount/sellers/3465
+        String url  = Config.getProperty("baseUrl")+  "/api/myaccount/sellers/3465" ;
+
+        Response response = RestAssured.given()
+                .auth().oauth2( getToken() )
+                .get(  url );
+
+        ObjectMapper mapper = new ObjectMapper( );
+
+        CustomResponse customResponse = mapper.readValue(  response.asString(), CustomResponse.class );
+
+        System.out.println( "Seller id: "+  customResponse.getSeller_id()  );
+        System.out.println(  "Seller name: "+  customResponse.getSeller_name()  );
+
+        /**
+         *     private int  seller_id;
+         *     private String seller_name;
+         *
+         */
 
     }
 
