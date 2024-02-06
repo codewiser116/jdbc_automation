@@ -18,6 +18,7 @@ import static utilities.CashwiseAuthorization.getToken;
 
 public class BankAccountAPIRunner {
     Faker faker = new Faker();
+    String bankID="";
 
     @Test
     public void test_1_getListOfBankAccounts() throws JsonProcessingException {
@@ -90,7 +91,7 @@ public class BankAccountAPIRunner {
         ObjectMapper mapper = new ObjectMapper();
         CustomResponse customResponse = mapper.readValue(  response.asString(), CustomResponse.class  );
 
-        String bankId = customResponse.getId();
+        bankID = customResponse.getId();
         response.prettyPrint();
 
     }
@@ -109,6 +110,19 @@ public class BankAccountAPIRunner {
 
         System.out.println( "Bank ID: "+  APIRunner.getCustomResponse().getId()  );
         System.out.println( "Bank account name: "+  APIRunner.getCustomResponse().getBank_account_name()  );
+
+
+    }
+
+
+    @Test
+    public void test_5_deleteBankaccount(){
+        // bankID
+        // https://backend.cashwise.us   /api/myaccount/bankaccount/   + bankID
+
+        String path = "/api/myaccount/bankaccount/"+ bankID;
+
+        APIRunner.runDELETE(  path );
 
 
     }
