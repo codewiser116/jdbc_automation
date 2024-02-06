@@ -7,7 +7,9 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import pojo.CustomResponse;
 import pojo.RequestBody;
 import utilities.APIRunner;
@@ -16,9 +18,10 @@ import utilities.Config;
 
 import static utilities.CashwiseAuthorization.getToken;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BankAccountAPIRunner {
     Faker faker = new Faker();
-    String bankID="";
+    static String bankID="";
 
     @Test
     public void test_1_getListOfBankAccounts() throws JsonProcessingException {
@@ -111,6 +114,8 @@ public class BankAccountAPIRunner {
         System.out.println( "Bank ID: "+  APIRunner.getCustomResponse().getId()  );
         System.out.println( "Bank account name: "+  APIRunner.getCustomResponse().getBank_account_name()  );
 
+        bankID = APIRunner.getCustomResponse().getId();
+
 
     }
 
@@ -121,6 +126,7 @@ public class BankAccountAPIRunner {
         // https://backend.cashwise.us   /api/myaccount/bankaccount/   + bankID
 
         String path = "/api/myaccount/bankaccount/"+ bankID;
+        System.out.println( path);
 
         APIRunner.runDELETE(  path );
 

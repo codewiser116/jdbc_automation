@@ -65,6 +65,7 @@ public class APIRunner {
                 .contentType(ContentType.JSON)
                 .body( requestBody )
                 .post( url );
+        response.prettyPrint();
 
         // step - 3
         ObjectMapper mapper = new ObjectMapper();
