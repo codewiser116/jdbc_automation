@@ -71,6 +71,21 @@ public class GetSingleData {
     }
 
 
+    /** TASK
+     *  Get single Seller
+     * Create Object mapper
+     * Create CustomResponse
+     * GET seller_id
+     *  https://backend.cashwise.us   /api/myaccount/sellers/3465
+     */
+
+    @Test
+    public void test_3_getSingleSeller(){
+        // https://backend.cashwise.us   /api/myaccount/sellers/3465
+
+    }
+
+
 
 
   /*  @Test

@@ -30,13 +30,13 @@ public class APIRunner {
         ObjectMapper mapper = new ObjectMapper();
 
         // step -4
-        try {
-              customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
+            try {
+                  customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
 
-        } catch (JsonProcessingException e) {
+            } catch (JsonProcessingException e) {
 
-            System.out.println( " This is a list response ");
-        }
+                System.out.println( " This is a list response ");
+            }
 
         return customResponse;
 
