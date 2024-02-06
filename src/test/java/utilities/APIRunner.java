@@ -26,16 +26,13 @@ public class APIRunner {
         Response response = RestAssured.given()
                 .auth().oauth2(   getToken()    )
                 .get( url );
-
         // step - 3
         ObjectMapper mapper = new ObjectMapper();
-
         // step -4
             try {
                   customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
-
             } catch (JsonProcessingException e) {
-                        // It's nested try-catch; Because we have to handle Array of ==> customResponseArray
+                         // It's nested try-catch; Because we have to handle Array of ==> customResponseArray
                         System.out.println( " This is a list response ");
                             try {
                                 customResponseArray = mapper.readValue( response.asString(), CustomResponse[].class );

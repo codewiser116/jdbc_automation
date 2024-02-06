@@ -2,11 +2,14 @@ package day_6_api_runner;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
 import pojo.CustomResponse;
+import pojo.RequestBody;
 import utilities.APIRunner;
 import utilities.CashwiseAuthorization;
 import utilities.Config;
@@ -62,11 +65,35 @@ public class BankAccountAPIRunner {
 
 
             }
+    }
 
 
+    @Test
+    public void test_3_createNewBankAccount() throws JsonProcessingException {
+        Faker faker = new Faker();
+        // https://backend.cashwise.us   /api/myaccount/bankaccount    // STEP -==> set up your URL
+        String url = Config.getProperty("baseUrl") + "/api/myaccount/bankaccount";
 
 
-        }
+        RequestBody requestBody = new RequestBody();
+        requestBody.setType_of_pay("CASH");
+        requestBody.setBank_account_name(  faker.company().name()+ " bank"  );
+        requestBody.setDescription( faker.commerce().department()+ " company" );
+        requestBody.setBalance( faker.number().numberBetween(200, 15000)  );
+
+        Response response = RestAssured.given()
+                .auth().oauth2(   getToken()  )
+                .contentType( ContentType.JSON )
+                .body( requestBody )
+                 .post(url );
+
+        ObjectMapper mapper = new ObjectMapper();
+        CustomResponse customResponse = mapper.readValue(  response.asString(), CustomResponse.class  );
+
+        String bankId = customResponse.getId();
+        response.prettyPrint();
+
+    }
 
 
 
