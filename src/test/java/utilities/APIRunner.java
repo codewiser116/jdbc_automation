@@ -10,6 +10,7 @@ import pojo.CustomResponse;
 import static utilities.CashwiseAuthorization.getToken;
 
 public class APIRunner {
+    private static CustomResponse customResponse;
 
     /** Day_5 APIRunner (Description about this class)
      * APIRunner class contains custom methods for CRUD commands
@@ -17,7 +18,35 @@ public class APIRunner {
      * script
      */
 
+    public static CustomResponse runGET( String path  ){
+        // step - 1
+        String  url =Config.getProperty("baseUrl") + path;
+        // step - 2
+        Response response = RestAssured.given()
+                .auth().oauth2(   getToken()    )
+                .get( url );
 
+        // step - 3
+        ObjectMapper mapper = new ObjectMapper();
+
+        // step -4
+        try {
+              customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
+
+        } catch (JsonProcessingException e) {
+
+            System.out.println( " This is a list response ");
+        }
+
+        return customResponse;
+
+    }
+
+
+    // I can read value of my private variable with help of getter method
+    public static CustomResponse getCustomResponse(){
+        return customResponse;
+    }
 
 
 

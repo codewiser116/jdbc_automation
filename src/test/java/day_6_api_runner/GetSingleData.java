@@ -4,8 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import lombok.Data;
 import org.junit.Test;
 import pojo.CustomResponse;
+import utilities.APIRunner;
 import utilities.CashwiseAuthorization;
 import utilities.Config;
 
@@ -25,8 +27,8 @@ public class GetSingleData {
     @Test
     public void test_1_getSingleBankAccount() throws JsonProcessingException {
         bankID = "1202";
-
-        //Step - 1
+        System.out.println("====REGULAR method==============================");
+        //Step - 1   // baseUrl                            path
         String url = Config.getProperty("baseUrl") + "/api/myaccount/bankaccount/" + bankID;
 
         //Step - 2 Hit GET request
@@ -34,7 +36,7 @@ public class GetSingleData {
                 .auth().oauth2(   getToken()    )
                 .get( url );
 
-        // response.prettyPrint();
+        //response.prettyPrint();
 
         //Step - 3 create ObjectMapper
         ObjectMapper mapper = new ObjectMapper();
@@ -43,10 +45,50 @@ public class GetSingleData {
         CustomResponse customResponse = mapper.readValue( response.asString(), CustomResponse.class );
 
         System.out.println(  "My ID: "+  customResponse.getId()  );
-
+        System.out.println(  "Bank account Name: "+  customResponse.getBank_account_name()  );
+        System.out.println(  "Balance: "+  customResponse.getBalance() );
 
 
     }
+
+    @Test
+    public void test_2_getSingleBankAccount(){
+        // https://backend.cashwise.us  /api/myaccount/bankaccount/1202
+        System.out.println("===========APIRunner =================================================");
+        String path = "/api/myaccount/bankaccount/1202";
+
+        APIRunner.runGET(  path );
+
+        String bankId =  APIRunner.getCustomResponse().getId();
+        String bankAccountName = APIRunner.getCustomResponse().getBank_account_name();
+        double balance = APIRunner.getCustomResponse().getBalance() ;
+
+        System.out.println(  "My ID: "+  bankId  );
+        System.out.println(  "Bank account Name: "+  bankAccountName  );
+        System.out.println(  "Balance: "+  balance);
+
+
+    }
+
+
+
+
+  /*  @Test
+    public void exampleCustomMethod(){
+        int a = 1;
+        int b = 4;
+
+        int c ;
+        c =  a +b;
+
+        System.out.println( "Concatenation: " + c );
+
+        System.out.println("======Custom Method==============");
+        System.out.println(  "Concatenation: " +   APIRunner.concatTwoNums(a, b));
+
+    }
+
+   */
 
 
 
