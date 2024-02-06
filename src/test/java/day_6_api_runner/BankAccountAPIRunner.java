@@ -74,7 +74,6 @@ public class BankAccountAPIRunner {
         // https://backend.cashwise.us   /api/myaccount/bankaccount    // STEP -==> set up your URL
         String url = Config.getProperty("baseUrl") + "/api/myaccount/bankaccount";
 
-
         RequestBody requestBody = new RequestBody();
         requestBody.setType_of_pay("CASH");
         requestBody.setBank_account_name(  faker.company().name()+ " bank"  );

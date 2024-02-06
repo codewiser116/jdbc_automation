@@ -3,9 +3,11 @@ package utilities;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.Getter;
 import pojo.CustomResponse;
+import pojo.RequestBody;
 
 import static utilities.CashwiseAuthorization.getToken;
 
@@ -19,6 +21,15 @@ public class APIRunner {
      * script
      */
 
+
+
+    /**
+     * Executes an HTTP GET request using RestAssured and retrieves the response as a CustomResponse object.
+     *
+     * @param path The endpoint path to be appended to the base URL.
+     * @return A CustomResponse object representing the response of the GET request.
+     *
+     */
     public static CustomResponse runGET( String path  ){
         // step - 1
         String  url =Config.getProperty("baseUrl") + path;
@@ -43,6 +54,38 @@ public class APIRunner {
             }
             return customResponse;
     }
+
+
+    public static CustomResponse runPOST(String path , RequestBody requestBody){
+        // step - 1
+        String  url =Config.getProperty("baseUrl") + path;
+        // step - 2
+        Response response = RestAssured.given()
+                .auth().oauth2(   getToken()    )
+                .contentType(ContentType.JSON)
+                .body( requestBody )
+                .post( url );
+
+
+        // step - 3
+        ObjectMapper mapper = new ObjectMapper();
+        // step -4
+        try {
+            customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
+        } catch (JsonProcessingException e) {
+            // It's nested try-catch; Because we have to handle Array of ==> customResponseArray
+            System.out.println( " This is a list response ");
+            try {
+                customResponseArray = mapper.readValue( response.asString(), CustomResponse[].class );
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+        return customResponse;
+    }
+
+
 
 
     // I can read value of my private variable with help of getter method
