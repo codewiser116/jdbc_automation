@@ -95,12 +95,13 @@ public class GetSingleData {
 
         System.out.println( "Seller id: "+  customResponse.getSeller_id()  );
         System.out.println(  "Seller name: "+  customResponse.getSeller_name()  );
-
-        /**
-         *     private int  seller_id;
-         *     private String seller_name;
-         *
-         */
+    }
+    @Test
+    public void test_4_getSingleSeller() throws JsonProcessingException {
+        String path = "/api/myaccount/sellers/3465";
+        APIRunner.runGET(path);
+        System.out.println(  "Seller id: " +  APIRunner.getCustomResponse().getSeller_id()   );
+        System.out.println(  "Seller name: " +  APIRunner.getCustomResponse().getSeller_name()   );
 
     }
 
