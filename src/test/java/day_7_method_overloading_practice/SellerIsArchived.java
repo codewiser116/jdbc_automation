@@ -7,7 +7,9 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import pojo.CustomResponse;
 import pojo.RequestBody;
 import utilities.APIRunner;
@@ -19,6 +21,7 @@ import java.util.Map;
 
 import static utilities.CashwiseAuthorization.getToken;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SellerIsArchived {
 
     @Test
@@ -72,7 +75,7 @@ public class SellerIsArchived {
 
         APIRunner.runGET(path, params);
 
-        // int sizOfArray = APIRunner.getCustomResponse().getResponses().length;
+        // int sizeOfArray = APIRunner.getCustomResponse().getResponses().length;
 
         CustomResponse[] customResponseArrayOfSellers = APIRunner.getCustomResponse().getResponses();
         int sizOfArray = customResponseArrayOfSellers.length;
@@ -84,8 +87,42 @@ public class SellerIsArchived {
 
             System.out.println(  "Seller Name: " + customResponseArrayOfSellers[i].getSeller_name() );
             Assert.assertNotNull( customResponseArrayOfSellers[i].getSeller_name()  );
+        }
+
+    }
+
+    @Test
+    public void test_3_gerAllisArchivedSellers_ApiRunner(){
+        /**
+         * GET all Sellers in archived (true)
+         * use APIRunner.runGET(path, params);
+         * Validate seller id
+         * seller_name
+         */
+
+        String path = "/api/myaccount/sellers";
+
+        Map<String , Object> params = new HashMap<>();
+        params.put( "isArchived", true );
+        params.put("page", 1);
+        params.put("size", 6);
+
+        APIRunner.runGET(path, params);
+
+        int sizeOfArray = APIRunner.getCustomResponse().getResponses().length;
+
+        for (int i=0; i< sizeOfArray; i++){
+
+            System.out.println(  "Seller Id: " +    APIRunner.getCustomResponse().getResponses()[i].getSeller_id()   );
+            Assert.assertNotNull(  APIRunner.getCustomResponse().getResponses()[i].getSeller_id() );
+
+            System.out.println(  "Seller Name: " + APIRunner.getCustomResponse().getResponses()[i].getSeller_name() );
+            Assert.assertNotNull( APIRunner.getCustomResponse().getResponses()[i].getSeller_name()  );
+
 
         }
+
+
 
 
 
