@@ -2,6 +2,7 @@ package day_7_method_overloading_practice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cucumber.java.bs.A;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -9,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import pojo.CustomResponse;
 import pojo.RequestBody;
+import utilities.APIRunner;
 import utilities.CashwiseAuthorization;
 import utilities.Config;
 
@@ -49,11 +51,42 @@ public class SellerIsArchived {
             System.out.println(  "Seller id: " + customResponses.getResponses()[i].getSeller_id()   );
             Assert.assertNotNull(  customResponses.getResponses()[i].getSeller_id()  );
 
-            System.out.println(  "Seller id: " + customResponses.getResponses()[i].getSeller_name()   );
+            System.out.println(  "Seller name: " + customResponses.getResponses()[i].getSeller_name()   );
             Assert.assertNotNull(  customResponses.getResponses()[i].getSeller_name() );
 
 
         }
+
+
+    }
+
+
+    @Test
+    public void test_2_gerAllisArchivedSellers_ApiRunner(){
+        String path = "/api/myaccount/sellers";
+
+        Map<String , Object> params = new HashMap<>();
+        params.put( "isArchived", false );
+        params.put("page", 1);
+        params.put("size", 10);
+
+        APIRunner.runGET(path, params);
+
+        // int sizOfArray = APIRunner.getCustomResponse().getResponses().length;
+
+        CustomResponse[] customResponseArrayOfSellers = APIRunner.getCustomResponse().getResponses();
+        int sizOfArray = customResponseArrayOfSellers.length;
+
+        for (int i=0; i< sizOfArray; i++){
+
+            System.out.println(  "Seller Id: " + customResponseArrayOfSellers[i].getSeller_id()   );
+            Assert.assertNotNull(   customResponseArrayOfSellers[i].getSeller_id() );
+
+            System.out.println(  "Seller Name: " + customResponseArrayOfSellers[i].getSeller_name() );
+            Assert.assertNotNull( customResponseArrayOfSellers[i].getSeller_name()  );
+
+        }
+
 
 
     }
