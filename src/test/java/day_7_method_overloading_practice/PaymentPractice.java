@@ -31,6 +31,9 @@ public class PaymentPractice {
         System.out.println("Invoice title: "  +   customResponse.getResponse().getInvoice_title()  );
         System.out.println( "Total pay: "  +  customResponse.getResponse().getTotal_pay()  );
 
+        System.out.println("Category ID: " +    customResponse.getCategory_response()[0].getCategory_id());
+
+        System.out.println( "Category title: "  +  customResponse.getCategory_response()[0].getCategory_title());
 
 
     }

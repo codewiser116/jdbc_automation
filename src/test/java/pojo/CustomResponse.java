@@ -12,6 +12,8 @@ public class CustomResponse { // ==  ResponseBody
      */
 
     // Category-controller
+    private CustomResponse[] category_response;
+
     private int category_id;
     private String category_title;
     private String category_description;
