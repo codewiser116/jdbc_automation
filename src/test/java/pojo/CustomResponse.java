@@ -23,6 +23,7 @@ public class CustomResponse { // ==  ResponseBody
 
 
     // Sellers RESPONSE body variables
+    private CustomResponse[] responses;
     private int  seller_id;
     private String seller_name;
     private String email;
@@ -34,6 +35,7 @@ public class CustomResponse { // ==  ResponseBody
      *     "product_title": "Apple magic mouse",
      *     "product_price": 350.0,
      */
+    // Product
     private int product_id;
     private String product_title;
     private double product_price;
