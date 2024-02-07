@@ -41,6 +41,10 @@ public class CustomResponse { // ==  ResponseBody
     private double product_price;
     private String product_description;
 
+   // Payment controller
+    private CustomResponse response;
+    private String invoice_title;
+    private double total_pay;
 
 
 
