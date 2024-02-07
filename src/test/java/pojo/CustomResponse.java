@@ -30,6 +30,7 @@ public class CustomResponse { // ==  ResponseBody
     private String seller_name;
     private String email;
     private String address;
+    private String phone_number;
 
 
     /**
