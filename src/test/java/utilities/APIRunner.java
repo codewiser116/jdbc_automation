@@ -9,6 +9,8 @@ import lombok.Getter;
 import pojo.CustomResponse;
 import pojo.RequestBody;
 
+import java.util.Map;
+
 import static utilities.CashwiseAuthorization.getToken;
 
 public class APIRunner {
@@ -53,6 +55,32 @@ public class APIRunner {
 
             }
             return customResponse;
+    }
+
+    public static CustomResponse runGET(String path , Map<String,Object> params){
+
+        String  url =Config.getProperty("baseUrl") + path;
+
+        Response response = RestAssured.given()
+                .auth().oauth2(   getToken()    )
+                .contentType(ContentType.JSON)
+                .params( params )
+                .get( url );
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
+        } catch (JsonProcessingException e) {
+            System.out.println( " This is a list response ");
+            try {
+                customResponseArray = mapper.readValue( response.asString(), CustomResponse[].class );
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+        return customResponse;
     }
 
 
