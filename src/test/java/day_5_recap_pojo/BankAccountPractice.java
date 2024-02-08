@@ -27,6 +27,8 @@ public class BankAccountPractice {
     Faker faker = new Faker();  //  STEP-2
     static String bankId= ""; //  STEP-2
 
+    static String bank_account_name;
+
 
     @Test
     public void test_1_createNewBankAccount() throws JsonProcessingException {
@@ -34,7 +36,7 @@ public class BankAccountPractice {
 
         // https://backend.cashwise.us   /api/myaccount/bankaccount    // STEP -==> set up your URL
         String url = Config.getProperty("baseUrl") + "/api/myaccount/bankaccount";
-
+        bank_account_name = faker.company().name()+ " bank";
         /*
         Serialization ==> Java request body => JSON object
         RequestBody only for POST or PUT or PATCH
@@ -42,7 +44,7 @@ public class BankAccountPractice {
         RequestBody requestBody = new RequestBody(); // STEP-4  go inside RequestBody class and declare your variables
         // STEP - 5 ==> set all RequestBody
         requestBody.setType_of_pay("CASH");
-        requestBody.setBank_account_name(  faker.company().name()+ " bank"  );
+        requestBody.setBank_account_name(  bank_account_name );
         requestBody.setDescription( faker.commerce().department()+ " company" );
         requestBody.setBalance( faker.number().numberBetween(200, 15000)  );
 

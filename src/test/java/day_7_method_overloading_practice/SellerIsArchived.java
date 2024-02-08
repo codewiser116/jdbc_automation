@@ -87,6 +87,7 @@ public class SellerIsArchived {
 
             System.out.println(  "Seller Name: " + customResponseArrayOfSellers[i].getSeller_name() );
             Assert.assertNotNull( customResponseArrayOfSellers[i].getSeller_name()  );
+
         }
 
     }

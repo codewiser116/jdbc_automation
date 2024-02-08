@@ -11,8 +11,6 @@ public class Sellers_allSellers {
     public void a_path(String path) {
         APIRunner.runGET( path );
         System.out.println( path  );
-
-
     }
 
 

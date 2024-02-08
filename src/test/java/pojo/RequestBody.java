@@ -38,7 +38,7 @@ public class RequestBody {
     private String address;
 
 
-    // day_6 Product controller
+    // Product controller
     private String product_title;
     private double product_price;
     private int service_type_id;
