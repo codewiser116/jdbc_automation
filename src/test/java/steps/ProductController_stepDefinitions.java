@@ -38,7 +38,6 @@ public class ProductController_stepDefinitions {
         product_price = faker.number().randomDouble(2,2,51);
         product_description = faker.commerce().department();
 
-
         requestBody.setProduct_title( product_title   );
         requestBody.setProduct_price(product_price );
         requestBody.setService_type_id(2);
@@ -81,7 +80,8 @@ public class ProductController_stepDefinitions {
 
     @Then("delete same product by id")
     public void delete_same_product_by_id() {
-
+        APIRunner.runDELETE( apiPath );
+        System.out.println("====== PRODUCT DELETED =========================");
     }
 
 
