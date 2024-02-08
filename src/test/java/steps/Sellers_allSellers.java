@@ -9,19 +9,19 @@ public class Sellers_allSellers {
 
     @Given("a path {string}")
     public void a_path(String path) {
-        APIRunner.runGET( path );
-        System.out.println( path  );
+        APIRunner.runGET(path);
+        System.out.println(path);
     }
 
 
     @When("get their names, print and validate they are not Null")
     public void get_their_names_print_and_validate_they_are_not_null() {
-    int sizeOfArray =  APIRunner.getCustomResponseArray().length;
+        int sizeOfArray = APIRunner.getCustomResponseArray().length;
 
-    for (  int i=0; i< sizeOfArray; i++){
-        System.out.println(  "Seller name: "+ APIRunner.getCustomResponseArray()[i].getSeller_name());
-        Assert.assertNotNull( APIRunner.getCustomResponseArray()[i].getSeller_name()  );
-    }
+        for (int i = 0; i < sizeOfArray; i++) {
+            System.out.println("Seller name: " + APIRunner.getCustomResponseArray()[i].getSeller_name());
+            Assert.assertNotNull(APIRunner.getCustomResponseArray()[i].getSeller_name());
+        }
 
 
     }
