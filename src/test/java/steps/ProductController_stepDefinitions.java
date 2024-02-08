@@ -52,6 +52,10 @@ public class ProductController_stepDefinitions {
 
         apiPath = path + "/" + product_id;
 
+        Assert.assertEquals("Status code is NOT correct",201,   APIRunner.getStatusCode()  );
+
+        System.out.println(   "MY STATUS CODE: " + APIRunner.getStatusCode() );
+
         System.out.println("=======New Product Created====================");
         System.out.println("=======TEST PASSED!====================");
 
@@ -72,8 +76,6 @@ public class ProductController_stepDefinitions {
         Assert.assertEquals( "Product Description is NOT correct", product_description, actualProductDescription  );
 
         System.out.println("=============TEST PASSED===================");
-
-
 
     }
 

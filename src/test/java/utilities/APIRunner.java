@@ -17,6 +17,8 @@ public class APIRunner {
     private static CustomResponse customResponse;
     private static CustomResponse[] customResponseArray;
 
+    private static int statusCode ;
+
     /** Day_5 APIRunner (Description about this class)
      * APIRunner class contains custom methods for CRUD commands
      * With help of this class we can focus on test logic, instead of automation
@@ -39,6 +41,8 @@ public class APIRunner {
         Response response = RestAssured.given()
                 .auth().oauth2(   getToken()    )
                 .get( url );
+
+        statusCode = response.getStatusCode();
         // step - 3
         ObjectMapper mapper = new ObjectMapper();
         // step -4
@@ -66,6 +70,8 @@ public class APIRunner {
                 .contentType(ContentType.JSON)
                 .params( params )
                 .get( url );
+
+        statusCode = response.getStatusCode();
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -95,6 +101,8 @@ public class APIRunner {
                 .post( url );
         response.prettyPrint();
 
+        statusCode = response.getStatusCode();
+
         // step - 3
         ObjectMapper mapper = new ObjectMapper();
         // step -4
@@ -122,6 +130,8 @@ public class APIRunner {
         Response response = RestAssured.given()
                 .auth().oauth2(   getToken()    )
                 .delete( url );
+
+        statusCode = response.getStatusCode();
 
         // step - 3
         ObjectMapper mapper = new ObjectMapper();
@@ -158,6 +168,8 @@ public class APIRunner {
         return customResponseArray;
     }
 
-
+    public static int getStatusCode(){
+        return statusCode;
+    }
 
 }
