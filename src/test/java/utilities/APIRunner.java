@@ -14,9 +14,12 @@ import java.util.Map;
 import static utilities.CashwiseAuthorization.getToken;
 
 public class APIRunner {
+    @Getter
     private static CustomResponse customResponse;
+    @Getter
     private static CustomResponse[] customResponseArray;
 
+    @Getter
     private static int statusCode ;
 
     /** Day_5 APIRunner (Description about this class)
@@ -99,7 +102,7 @@ public class APIRunner {
                 .contentType(ContentType.JSON)
                 .body( requestBody )
                 .post( url );
-        response.prettyPrint();
+        // response.prettyPrint();
 
         statusCode = response.getStatusCode();
 
@@ -159,17 +162,17 @@ public class APIRunner {
 
 
 
-    // I can read value of my private variable with help of getter method
-    public static CustomResponse getCustomResponse(){
-        return customResponse;
-    }
-
-    public static CustomResponse[] getCustomResponseArray(){
-        return customResponseArray;
-    }
-
-    public static int getStatusCode(){
-        return statusCode;
-    }
+//    // I can read value of my private variable with help of getter method
+//    public static CustomResponse getCustomResponse(){
+//        return customResponse;
+//    }
+//
+//    public static CustomResponse[] getCustomResponseArray(){
+//        return customResponseArray;
+//    }
+//
+//    public static int getStatusCode(){
+//        return statusCode;
+//    }
 
 }

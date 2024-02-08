@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import pojo.RequestBody;
 import utilities.APIRunner;
 
@@ -11,7 +12,7 @@ public class BankAccounts {
 
     static String path = "/api/myaccount/bankaccount";
     static String id;
-    static String bankAccountName;
+    static String bankAccount_Name;
     RequestBody requestBody = new RequestBody();
 
 
@@ -25,6 +26,7 @@ public class BankAccounts {
 
         APIRunner.runPOST(path,  requestBody );
         id = APIRunner.getCustomResponse().getId();
+        bankAccount_Name = bankAccountName; // Expected data
         System.out.println("=======TEST PASSED===================");
 
 
@@ -34,13 +36,16 @@ public class BankAccounts {
 
     @And("Get created Bank account by id and check status code is {int}")
     public void getCreatedBankAccountByIdAndCheckStatusCodeIs(int expectedStatusCode) {
-
-
+        APIRunner.runGET( path+ "/"+  id );
+        System.out.println(path+ "/"+  id  );
+        Assert.assertEquals( bankAccount_Name, APIRunner.getCustomResponse().getBank_account_name() );
+        Assert.assertEquals( expectedStatusCode, APIRunner.getStatusCode() );
     }
 
 
     @Then("Get same Bank account by id and delete")
     public void getSameBankAccountByIdAndDelete() {
+        APIRunner.runDELETE(path+ "/"+  id);
 
     }
 
