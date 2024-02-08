@@ -9,4 +9,8 @@
 
 
 
+    @homework
+    Scenario: create seller, get id and then hit api and validate
+      Given I create all variables in class level, create seller and get seller_id
+      Then I get same seller by id and validate
 

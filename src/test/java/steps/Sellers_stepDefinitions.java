@@ -1,9 +1,11 @@
 package steps;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
 import org.junit.Assert;
+import pojo.RequestBody;
 import utilities.APIRunner;
 
 import java.util.HashMap;
@@ -41,4 +43,52 @@ public class Sellers_stepDefinitions {
     }
 
 
+    Faker faker = new Faker();
+
+    RequestBody requestBody = new RequestBody();
+    static String path = "/api/myaccount/sellers";
+    static int seller_id;
+    static String seller_name;
+    static String phone_number;
+    static String address;
+
+    @Given("I create all variables in class level, create seller and get seller_id")
+    public void iCreateAllVariablesInClassLevelCreateSellerAndGetSeller_id() {
+
+        requestBody.setCompany_name( faker.company().name() );
+        requestBody.setSeller_name( faker.name().fullName() );
+        requestBody.setEmail( faker.internet().emailAddress() );
+        requestBody.setPhone_number( faker.phoneNumber().cellPhone() );
+        requestBody.setAddress( faker.address().fullAddress() );
+
+        APIRunner.runPOST(path,requestBody);
+
+        System.out.println("CREATED: ");
+        System.out.println("name = "  + APIRunner.getCustomResponse().getSeller_name());
+        System.out.println("email = "  + APIRunner.getCustomResponse().getEmail());
+
+
+        seller_id = APIRunner.getCustomResponse().getSeller_id();
+        seller_name = APIRunner.getCustomResponse().getSeller_name();
+        phone_number = APIRunner.getCustomResponse().getPhone_number();
+        address = APIRunner.getCustomResponse().getAddress();
+    }
+
+    @Then("I get same seller by id and validate")
+    public void iGetSameSellerByIdAndValidate() {
+        APIRunner.runGET(path + "/" + seller_id);
+
+        int actualSellerID = APIRunner.getCustomResponse().getSeller_id();
+
+        Assert.assertNotEquals(0,seller_id);
+        Assert.assertEquals(seller_id, actualSellerID);
+        Assert.assertEquals(seller_name, APIRunner.getCustomResponse().getSeller_name());
+        Assert.assertEquals(phone_number, APIRunner.getCustomResponse().getPhone_number());
+        Assert.assertEquals(address, APIRunner.getCustomResponse().getAddress());
+
+        System.out.println("GET: ");
+        System.out.println("name = "  + APIRunner.getCustomResponse().getSeller_name());
+        System.out.println("email = "  + APIRunner.getCustomResponse().getEmail());
+
+    }
 }
