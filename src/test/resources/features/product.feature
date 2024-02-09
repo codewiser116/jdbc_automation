@@ -1,4 +1,4 @@
-
+@api
   Feature: Product controller test
     @product
     Scenario: Create product and validate data

@@ -2,7 +2,7 @@ Feature: Retrieve Sellers Information
 
   #//https://backend.cashwise.us/api/myaccount/sellers/all
 
-  @sellersAll
+  @sellersAll @api
   Scenario: get list of Sellers, print their names, validate they are not Null
 
     Given a path "/api/myaccount/sellers/all"

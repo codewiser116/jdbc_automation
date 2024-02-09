@@ -1,4 +1,4 @@
-@bankAccount
+@bankAccount @api
 Feature: Test bank Accounts
 
 

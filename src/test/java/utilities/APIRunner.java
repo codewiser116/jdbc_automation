@@ -126,6 +126,39 @@ public class APIRunner {
     }
 
 
+    public static CustomResponse runPUT(String path , RequestBody requestBody){
+        // step - 1
+        String  url =Config.getProperty("baseUrl") + path;
+        // step - 2
+        Response response = RestAssured.given()
+                .auth().oauth2(   getToken()    )
+                .contentType(ContentType.JSON)
+                .body( requestBody )
+                .put( url );
+        // response.prettyPrint();
+
+        statusCode = response.getStatusCode();
+
+        // step - 3
+        ObjectMapper mapper = new ObjectMapper();
+        // step -4
+        try {
+            customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
+        } catch (JsonProcessingException e) {
+            // It's nested try-catch; Because we have to handle Array of ==> customResponseArray
+            System.out.println( " This is a list response ");
+            try {
+                customResponseArray = mapper.readValue( response.asString(), CustomResponse[].class );
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+        System.out.println(  "My status code: "+ response.statusCode() );
+        return customResponse;
+    }
+
+
     public static CustomResponse runDELETE(String path ){
         // step - 1
         String  url =Config.getProperty("baseUrl") + path;
