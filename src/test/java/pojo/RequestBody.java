@@ -36,6 +36,8 @@ public class RequestBody {
     //private String email; Leave it as it's ; Because we already have same variable for other category
     private String phone_number;
     private String address;
+    private String client_name;
+    private int [] tags_id;
 
 
     // Product controller

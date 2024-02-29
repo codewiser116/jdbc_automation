@@ -31,6 +31,10 @@ public class CustomResponse { // ==  ResponseBody
     private String email;
     private String address;
     private String phone_number;
+    private int client_id;
+    private String client_name;
+    private String company_name;
+    private int [] tags_id;
 
 
     /**
@@ -65,13 +69,6 @@ public class CustomResponse { // ==  ResponseBody
      *     "number_of_invoices": 0
      * }
      */
-
-
-
-
-
-
-
 
 
 

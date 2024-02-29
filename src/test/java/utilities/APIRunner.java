@@ -95,7 +95,7 @@ public class APIRunner {
 
     public static CustomResponse runPOST(String path , RequestBody requestBody){
         // step - 1
-        String  url =Config.getProperty("baseUrl") + path;
+        String  url = Config.getProperty("baseUrl") + path;
         // step - 2
         Response response = RestAssured.given()
                 .auth().oauth2(   getToken()    )
@@ -112,6 +112,7 @@ public class APIRunner {
         try {
             customResponse = mapper.readValue(response.asString(), CustomResponse.class ) ;
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             // It's nested try-catch; Because we have to handle Array of ==> customResponseArray
             System.out.println( " This is a list response ");
             try {
@@ -121,6 +122,7 @@ public class APIRunner {
             }
 
         }
+        response.prettyPrint();
         System.out.println(  "My status code: "+ response.statusCode() );
         return customResponse;
     }
