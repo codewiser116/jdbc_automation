@@ -12,7 +12,7 @@ import utilities.Config;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BankAccount {
+public class BankAccountTest {
     /**
      * Create new bank account
      * 1) I have to get token

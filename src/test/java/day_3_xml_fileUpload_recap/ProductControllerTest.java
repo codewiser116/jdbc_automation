@@ -10,10 +10,9 @@ import utilities.CashwiseAuthorization;
 import utilities.Config;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
-public class ProductController {
+public class ProductControllerTest {
 
     String token = CashwiseAuthorization.getToken();
 

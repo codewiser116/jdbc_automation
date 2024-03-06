@@ -8,9 +8,8 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.SortedMap;
 
-public class ReqresIn {
+public class ReqresInTest {
 
     @Test
     public void test_1_getSingleUser(){
