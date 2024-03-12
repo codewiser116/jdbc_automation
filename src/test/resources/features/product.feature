@@ -1,4 +1,4 @@
-@api
+@api @regression @smoke
   Feature: Product controller test
     @product
     Scenario: Create product and validate data

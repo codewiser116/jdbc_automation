@@ -1,4 +1,4 @@
-@api
+@api @regression
   Feature: Test Sellers
 
 # /api/myaccount/sellers   ?  isArchived=true  &page=1   &size=10

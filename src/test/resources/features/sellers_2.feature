@@ -1,3 +1,4 @@
+@regression
 Feature: Retrieve Sellers Information
 
   #//https://backend.cashwise.us/api/myaccount/sellers/all

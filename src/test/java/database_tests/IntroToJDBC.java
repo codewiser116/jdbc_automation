@@ -73,7 +73,6 @@ public class IntroToJDBC {
             // verify the number of records = 3867
 
 
-
         }catch (SQLException e){
             e.printStackTrace();
         }

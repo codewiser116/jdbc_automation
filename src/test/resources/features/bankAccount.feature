@@ -1,4 +1,4 @@
-@bankAccount @api
+@bankAccount @api @regression
 Feature: Test bank Accounts
 
 

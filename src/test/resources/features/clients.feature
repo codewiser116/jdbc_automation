@@ -1,3 +1,4 @@
+@regression @smoke
 Feature: user should be able to create a client
 
   @dbTest1
